@@ -1,0 +1,121 @@
+.header {
+    top: 0;
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,.05);
+    background-color: #fff;
+
+    .logo-container {
+        float: left;
+        height: inherit;
+        margin-left: 6%;
+
+        .logo {
+            width: 100px;
+        }
+    }
+    
+    .search {
+        float: right;
+        position: relative;
+        width: 100%;
+        align-items: center;
+        display: flex;
+
+        input {
+            display: inline-block;
+            font-size: 14px;
+            height: 20px;
+            line-height: 24px;
+            color: #696e79;
+            box-sizing: content-box;
+            padding: 8px 10px 10px;
+            outline: 0;
+            border: 1px solid #f5f5f6;
+            border-radius: 0 4px 4px 0;
+            border-left: 0;
+            background: #f5f5f6;
+            width: 66%;
+            margin-right: 16px;
+        }
+
+        .search-cta {
+            background: #009688;
+            width: 124px;
+            border-radius: 4px;
+        }
+    }
+
+    .nav-items {
+        width: 80%;
+        margin-right: 6%;
+
+        ul {
+            list-style-type: none;
+            float: right;
+    
+            li {
+                margin: 20px;
+                position: relative;
+                top: 10px;
+            }
+        }
+    }
+}
+
+.res-container {
+    margin: 120px;
+    flex-wrap: wrap;
+    gap: 37px;
+
+    .card-body {
+        padding-left: 0;
+        padding-right: 0;
+
+        .res-cuisine {
+            color: #686b78;
+            font-size: 13px;
+        }
+
+        .res-details {
+            font-size: 14px;
+        }
+    }
+}
+
+.res-card {
+    .res-card-wrapper {
+        padding: 24px;
+        border: 1px solid white;
+
+        &:hover {
+            cursor: pointer;
+            border-color: #d3d5df;
+            box-shadow: 0 4px 7px 0 rgba(218,220,230,.6);
+        }
+    }
+    .card-img-top {
+        border-radius: 0;
+    }
+
+    .res-ratings {
+        background: #009688;
+        width: 53px;
+        padding: 0 5px;
+        font-weight: 300;
+        color: white;
+
+        .icon-star {
+            font-size: 14px;
+            margin-right: 4px;
+            position: relative;
+            top: -1px;
+
+            &::before {
+                content: '\2606';
+            }
+        }
+    }
+}
