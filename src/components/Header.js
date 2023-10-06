@@ -68,7 +68,7 @@ import { LOGO_URL } from "../utils/constants";
 //     }
 // }];
 
-const Header = () => {
+const Header = (props) => {
     const [resList, setListOfRestaurants] = useState([
         {
             "data": {
@@ -127,6 +127,13 @@ const Header = () => {
             }
         }
     ]);
+    const userAuthCtaText = 'Login'
+    const [loginCta, setLoginCta ] = useState(userAuthCtaText);
+
+    const toggleCtaText = () => {
+        loginCta === 'Login' ? setLoginCta('Logout') : setLoginCta('Login');
+    };
+
     return (
         <div className="header d-flex">
             <div className="logo-container">
@@ -134,9 +141,7 @@ const Header = () => {
             </div>
             <div className="search">
                 <input type="text" placeholder="Search" className="search-restaurants" id="search-input"/>
-                <label htmlFor="search-input" className="search-label">
-                    <button className="btn btn-primary search-cta">Search</button>
-                </label>
+                <button className="btn btn-primary search-cta">Search</button>
             </div>
             <div className="nav-items">
                 <ul className="d-flex">
@@ -151,6 +156,11 @@ const Header = () => {
                     <li>Home</li>
                     <li>About Us</li>
                     <li>Cart</li>
+                    <li>
+                        <button className="btn btn-primary login-toggle-cta" onClick={toggleCtaText}>
+                            {loginCta}
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>

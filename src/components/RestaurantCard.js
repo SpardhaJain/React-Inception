@@ -1,8 +1,9 @@
 import { CDN_URL } from "../utils/constants";
 
 const RestaurantCard = (resDetails) => {
-    const { data } = resDetails?.resData;
-    const { name, cuisines, avgRating, slaString, cloudinaryImageId, costForTwoString } = data;
+    const { info } = resDetails?.resData;
+    const { name, cuisines, avgRatingString, sla, cloudinaryImageId, costForTwo } = info;
+    const { slaString } = sla;
     const styleCard = {
         width: '332px',
         border: 'none'
@@ -17,12 +18,12 @@ const RestaurantCard = (resDetails) => {
                     <div className="res-details d-flex justify-content-between">
                         <div className="res-ratings">
                             <span className="icon-star"></span>
-                            <span>{avgRating}</span>
+                            <span>{avgRatingString}</span>
                         </div>
                         <div>&#x2022;</div>
                         <div>{slaString}</div>
                         <div>&#x2022;</div>
-                        <div>{costForTwoString}</div>
+                        <div>{costForTwo}</div>
                     </div>
                 </div>
             </div>
