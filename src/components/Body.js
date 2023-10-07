@@ -1,6 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
-import resObj from "../utils/mockData";
+import { RES_LIST_API } from '../utils/constants';
 import Shimmer from "./Shimmer";
 
 // Not using keys in loop (unacceptable) <<<<<< using index as keys <<<<<<< unique id (best practice)
@@ -14,12 +14,10 @@ const Body = () => {
     useEffect(() => {
         fetchData()
     }, []);
+
     const fetchData = async () => {
-        const data = await fetch(
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9783692&lng=77.6408356&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-        );
+        const data = await fetch(RES_LIST_API);
         const json = await data.json();
-        console.log(json);
 
         //Optional Chaining
         const restaurants = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
@@ -41,7 +39,7 @@ const Body = () => {
 
 
     // Conditional Rendering
-    return resList.length === 0 ? (
+    return resList?.length === 0 ? (
         // Shimmer UI
         <Shimmer/>
     ) : (
@@ -56,19 +54,18 @@ const Body = () => {
                         const filteredList = resList.filter(
                             (res) => res.info.avgRating > 4.2
                         );
-                        setResList(filteredList);   
+                        setFilteredRestaurants(filteredList);  
                     }}>
                     Top Rated Restaurants
                 </button>
             </div>
             <div className="res-container d-flex">
-                { filteredRestaurants.length ? 
+                { filteredRestaurants?.length ? 
                     filteredRestaurants.map((restaurant, index) => (
                         <RestaurantCard key={restaurant.info.id} resData = {restaurant}/>)
                     ) :  
                     ( <h3>No Restaurants Found</h3> )
                 }
-                {/* <RestaurantCard resData = {resObj[0]} /> */}
             </div>
         </div>
     );

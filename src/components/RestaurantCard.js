@@ -1,15 +1,16 @@
 import { CDN_URL } from "../utils/constants";
+import { Link } from 'react-router-dom';
 
 const RestaurantCard = (resDetails) => {
     const { info } = resDetails?.resData;
-    const { name, cuisines, avgRatingString, sla, cloudinaryImageId, costForTwo } = info;
+    const { name, cuisines, avgRatingString, sla, cloudinaryImageId, costForTwo, id } = info;
     const { slaString } = sla;
     const styleCard = {
         width: '332px',
         border: 'none'
     };
     return (
-        <div className="card res-card" style={styleCard}>
+        <Link to={"/restaurants/" + id} className="card res-card" style={styleCard}>
             <div className="res-card-wrapper">
                 <img className="card-img-top" src={CDN_URL + cloudinaryImageId} alt="Restaurant Card Logo" />
                 <div className="card-body">
@@ -27,7 +28,7 @@ const RestaurantCard = (resDetails) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

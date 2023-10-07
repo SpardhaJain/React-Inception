@@ -71,6 +71,12 @@
                 margin: 20px;
                 position: relative;
                 top: 10px;
+
+                a {
+                    text-decoration: none;
+                    color: #000000;
+                    cursor: pointer;
+                }
             }
         }
     }
@@ -132,6 +138,7 @@
 }
 
 .res-card {
+    text-decoration: none;
     .res-card-wrapper {
         padding: 24px;
         border: 1px solid white;
@@ -173,4 +180,7 @@
     padding: 100px;
     margin-bottom: 32px;
 }
-  
+
+.p-around {
+    padding: 56px;
+}
