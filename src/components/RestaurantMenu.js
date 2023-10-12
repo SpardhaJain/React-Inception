@@ -1,9 +1,12 @@
 import'./RestaurantMenu.scss';
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/hooks/useRestaurantMenu";
+import RestaurantCategory from './RestaurantCategory';
 import { useParams } from "react-router-dom";
+import { useState } from 'react';
 
 const RestaurantMenu = () => {
+    const [showAccordionIndex, setShowAccordionIndex] = useState(null);
     const { resId } = useParams();
     const resInfo = useRestaurantMenu(resId);
     
@@ -11,7 +14,9 @@ const RestaurantMenu = () => {
 
     const resData = resInfo.cards[0]?.card?.card?.info;
     const { name, cuisines, areaName, costForTwoMessage, feeDetails, sla } = resData;
-    const itemCards = resInfo.cards[2]?.groupedCard.cardGroupMap?.REGULAR.cards[2].card.card.itemCards;
+    
+    const resCardsList = resInfo.cards[2]?.groupedCard.cardGroupMap?.REGULAR.cards;
+    const categories = resCardsList.filter(resCard => resCard.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
     
     return(
         <div className="res-details-container">
@@ -37,23 +42,20 @@ const RestaurantMenu = () => {
                 </div>
             </div>
 
-            <div className="res-menu-container">
-                <h3>Recommended ({itemCards.length})</h3>
-                <div className="res-menu--details-container">
-                    {itemCards.map((item) => {
-                        const { name, description, defaultPrice, price } = item.card.info;
-                        return(
-                            <div key={name}>
-                                <div className="dish-item-details">
-                                    <div className="item-name">{name}</div>
-                                    <div className="item-price">{"Rs. " + (price/100 || defaultPrice/100)}</div>
-                                    <div className="item-desc">{description}</div>
-                                </div>
-                                <div className="dishes-divider"></div>
-                            </div>
-                        )}
-                    )}
-                </div>
+            <div className="accordion">
+                {categories.map(((category, index) => {
+                    const categoryDetail = category.card?.card;
+                    return (
+                        <RestaurantCategory 
+                            key={categoryDetail.title}
+                            categoryDetail={categoryDetail}
+                            catIndex={index}
+                            showItems={index === showAccordionIndex && true}
+                            expandedAccordion={() => {
+                                setShowAccordionIndex(index);
+                            }}
+                        />)
+                }))}
             </div>
         </div>
     )

@@ -104,7 +104,7 @@
 .food-body {
     margin: 24px 120px 120px;
     .nav-items {
-        margin-bottom: 16px;
+        margin-bottom: 48px;
         width: 100%;
         display: inline-block;
 
@@ -139,18 +139,33 @@
 
 .res-card {
     text-decoration: none;
+    margin-bottom: 32px;
+    
+    .res-card-badge {
+        position: absolute;
+        top: 10%;
+        background: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+
     .res-card-wrapper {
         padding: 24px;
-        border: 1px solid white;
+        border: 1px solid #f7f7f7;
+        border-radius: 5%;
+        background: #f7f7f7;
 
         &:hover {
             cursor: pointer;
             border-color: #d3d5df;
             box-shadow: 0 4px 7px 0 rgba(218,220,230,.6);
+            border-radius: 5%;
         }
     }
     .card-img-top {
-        border-radius: 0;
+        border-radius: 5%;
     }
 
     .res-ratings {
@@ -183,4 +198,16 @@
 
 .p-around {
     padding: 56px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.p-static {
+    position: static;
+}
+
+.p-absolute {
+    position: absolute;
 }

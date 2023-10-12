@@ -60,13 +60,18 @@
     .res-menu-container {
         position: relative;
         margin: 24px 8px 16px 16px;
-        
-        h3 {
+        border: 0.8px solid #dee2e6;
+        .category-title {
             color: #3e4152;
             font-weight: bold;
-            font-size: 18px;
-            display: inline-block;
-            margin-bottom: 24px;
+            background-color: #9ebebb;
+
+            &:focus {
+                border-color: #9ebebb;
+                box-shadow: none;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
         }
     }
 
@@ -96,6 +101,35 @@
                 width: 70%;
                 letter-spacing: -.3px;
                 font-size: 14px;
+            }
+
+            .item-image-wrapper {
+                position: relative;
+                display: flex;
+                .item-image {
+                    width: 100%;
+                    float: right;
+                }
+
+                button {
+                    color: #9ebebb;
+                    background-color: #fff;
+                    border: none;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .add-item-cta {
+                    border: 1px solid;
+                    border-radius: 3px;
+                    width: 10px;
+                    padding: 4px 10px;
+                    font-family: ProximaNova, arial, Helvetica Neue, sans-serif;
+                    top: 100px;
+                    width: 88px;
+                    background: white;
+                }
             }
         }
 

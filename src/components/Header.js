@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
-const Header = (props) => {
+const Header = () => {
+    const data = useContext(UserContext);
     const userAuthCtaText = 'Login'
     const [loginCta, setLoginCta ] = useState(userAuthCtaText);
 
@@ -37,6 +39,9 @@ const Header = (props) => {
                         <button className="btn btn-primary login-toggle-cta" onClick={toggleCtaText}>
                             {loginCta}
                         </button>
+                    </li>
+                    <li>
+                        {data.loggedInUser}
                     </li>
                 </ul>
             </div>

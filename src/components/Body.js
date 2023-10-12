@@ -1,7 +1,13 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, { withFastLabel } from "./RestaurantCard";
+import { useEffect, useState, useContext } from "react";
 import { RES_LIST_API } from '../utils/constants';
 import Shimmer from "./Shimmer";
+import UserContext from "../utils/UserContext";
+import { Link } from 'react-router-dom';
+const styleCard = {
+    width: '332px',
+    border: 'none'
+};
 
 // Not using keys in loop (unacceptable) <<<<<< using index as keys <<<<<<< unique id (best practice)
 
@@ -36,7 +42,9 @@ const Body = () => {
         });
         setFilteredRestaurants(searchedResList)
     }
+    const RestaurantCardFast = withFastLabel(RestaurantCard);
 
+    const { loggedInUser, setUserName } = useContext(UserContext);
 
     // Conditional Rendering
     return resList?.length === 0 ? (
@@ -58,12 +66,23 @@ const Body = () => {
                     }}>
                     Top Rated Restaurants
                 </button>
+
+                <label className="m-4" htmlFor="user-name">User Name:</label>
+                <input id="user-name" type="text" placeholder="UserName" value={loggedInUser} onChange={(e) => setUserName(e.target.value)}/>
             </div>
             <div className="res-container d-flex">
                 { filteredRestaurants?.length ? 
                     filteredRestaurants.map((restaurant, index) => (
-                        <RestaurantCard key={restaurant.info.id} resData = {restaurant}/>)
-                    ) :  
+                        <Link to={"/restaurants/" + restaurant.info.id} key={restaurant.info.id} className="card res-card" style={styleCard}>
+                            {
+                                restaurant.info.sla?.deliveryTime && restaurant.info.sla?.deliveryTime < 25 ?
+                                (
+                                    <RestaurantCardFast resData = {restaurant}/>
+                                ) : (
+                                    <RestaurantCard resData = {restaurant}/>
+                            )}
+                        </Link>
+                    )) :  
                     ( <h3>No Restaurants Found</h3> )
                 }
             </div>

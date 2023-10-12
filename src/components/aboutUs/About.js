@@ -2,6 +2,7 @@ import User from "./User";
 import UserClass from "./UserClass";
 import './About.scss';
 import { Component } from "react";
+import UserContext from "../../utils/UserContext";
 
 // Functional Component Parent
 
@@ -35,6 +36,13 @@ class About extends Component {
             <div className="p-around">
                 <h1>About Us</h1>
                 <h2>This is my first React App</h2>
+                <UserContext.Consumer>
+                    {(data) => {
+                        return(
+                            <h3>{data.loggedInUser}</h3>
+                        )
+                    }}
+                </UserContext.Consumer>
                 <User name={"Spardha Jain from functional component"} location={"Indore"}/>
                 <UserClass location={"Bengaluru"}/>
                 <UserClass location={"Bengaluru"}/>
