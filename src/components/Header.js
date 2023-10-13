@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
     const data = useContext(UserContext);
@@ -12,12 +13,14 @@ const Header = () => {
         loginCta === 'Login' ? setLoginCta('Logout') : setLoginCta('Login');
     };
 
+    const cartItems = useSelector((store) => store.cart.items);
+    console.log(cartItems);
     return (
         <div className="header d-flex">
             <div className="logo-container">
                 <img className="logo" src={LOGO_URL}/>
             </div>
-            <div className="search">
+            <div className="search d-none">
                 <input type="text" placeholder="Search" className="search-restaurants" id="search-input"/>
                 <button className="btn btn-primary search-cta">Search</button>
             </div>
@@ -33,7 +36,7 @@ const Header = () => {
                         <Link to="/contact">Contact Us</Link>
                     </li>
                     <li>
-                        <Link>Cart</Link>
+                        <Link to="/cart">Cart ({cartItems.length} items)</Link>
                     </li>
                     <li>
                         <button className="btn btn-primary login-toggle-cta" onClick={toggleCtaText}>
