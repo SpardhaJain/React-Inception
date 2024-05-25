@@ -1,6 +1,6 @@
 # Spardha React Learn
 
-# Namste Food 
+# Food App - Swiggy clone 
 
  * Header
  *  - Logo Component
